@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Simulación del Modelo de Descanso</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <script src="https://picture-search.skywork.ai/aippt/static/tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" rel="stylesheet" />
+    <style>
+        body {
+            width: 1280px;
+            height: 720px;
+            overflow: hidden;
+            background-color: #F4F7F6;
+            font-family: "Segoe UI", "Roboto", "Helvetica Neue", sans-serif;
+            color: #2C3E50
+        }
+
+        .slide-root-container {
+            width: 1280px;
+            height: 720px;
+            background-color: #F4F7F6;
+            display: flex;
+            flex-direction: column
+        }
+
+        .title-section-container {
+            display: flex;
+            flex-direction: column;
+            margin: 24px 50px 16px 50px;
+            padding: 0 0
+        }
+
+        .title-header-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 12px 15px
+        }
+
+        .title-accent-bar {
+            width: 4px;
+            background-color: #27AE60;
+            height: 35px;
+            border-radius: 2px
+        }
+
+        .title-text-group {
+            display: flex;
+            flex-direction: column
+        }
+
+        .title-main-heading {
+            font-family: "Segoe UI", sans-serif;
+            font-weight: 700;
+            font-size: 26px;
+            color: #2C3E50;
+            margin: 0 0;
+            padding: 0 0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px
+        }
+
+        .title-sub-heading {
+            font-family: "Segoe UI", sans-serif;
+            font-weight: 400;
+            font-size: 14px;
+            color: #7F8C8D;
+            margin: 2px 0 0 0;
+            padding: 0 0
+        }
+
+        .main-content-layout {
+            display: flex;
+            flex-direction: row;
+            padding: 0 50px 32px 50px;
+            gap: 24px 30px;
+            flex: 1;
+            align-items: stretch
+        }
+
+        .left-column-simulation {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            flex: 1;
+            gap: 20px
+        }
+
+        .right-column-results {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            flex: 1;
+            gap: 16px 20px
+        }
+
+        .simulation-info-card {
+            background-color: #FFF;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            flex: 1
+        }
+
+        .card-title-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ECF0F1;
+            padding-bottom: 10px
+        }
+
+        .card-icon-style {
+            color: #2980B9;
+            font-size: 20px
+        }
+
+        .card-title-text {
+            font-size: 18px;
+            font-weight: 700;
+            color: #34495E
+        }
+
+        .variable-grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px
+        }
+
+        .variable-item-box {
+            background-color: #F8F9FA;
+            padding: 12px;
+            border-radius: 8px;
+            border-left: 3px solid #27AE60
+        }
+
+        .variable-label-name {
+            font-size: 13px;
+            color: #7F8C8D;
+            font-weight: 600;
+            display: block
+        }
+
+        .variable-value-range {
+            font-size: 15px;
+            color: #2C3E50;
+            font-weight: 700
+        }
+
+        .insight-list-wrapper {
+            padding: 0;
+            margin: 15px 0 0 0;
+            list-style: none
+        }
+
+        .insight-list-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 12px;
+            font-size: 15px;
+            line-height: 1.4;
+            color: #2C3E50
+        }
+
+        .insight-bullet-point {
+            color: #27AE60;
+            margin-top: 4px;
+            font-size: 12px
+        }
+
+        .montecarlo-stats-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px 15px;
+            margin-top: 8px
+        }
+
+        .stat-highlight-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #EBF5FB;
+            padding: 12px 15px;
+            border-radius: 10px
+        }
+
+        .stat-label-text {
+            font-weight: 600;
+            font-size: 14px;
+            color: #2980B9
+        }
+
+        .stat-value-text {
+            font-weight: 800;
+            font-size: 20px;
+            color: #2C3E50
+        }
+
+        .chart-placeholder-container {
+            width: 100%;
+            height: 238px;
+            margin-top: 12px
+        }
+
+        html {
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slide-root-container" style="overflow: hidden;">
+        <!-- Title Section -->
+        <div class="title-section-container">
+            <div class="title-header-wrapper">
+                <div class="title-accent-bar"></div>
+                <div class="title-text-group">
+                    <h2 class="title-main-heading">Simulación del Modelo de Descanso</h2>
+                    <p class="title-sub-heading">Implementación de un sistema Mamdani y simulación de 1.000 casos</p>
+                </div>
+            </div>
+        </div>
+        <!-- Main Content -->
+        <div class="main-content-layout">
+            <!-- Left Column: Setup and Variables -->
+            <div class="left-column-simulation">
+                <div class="simulation-info-card">
+                    <div class="card-title-wrapper">
+                        <i class="fa-solid fa-sliders card-icon-style"></i>
+                        <span class="card-title-text">Entradas del Sistema Difuso</span>
+                    </div>
+                    <div class="variable-grid-container">
+                        <div class="variable-item-box">
+                            <span class="variable-label-name">Horas de Sueño</span>
+                            <span class="variable-value-range">0 - 10 Horas</span>
+                        </div>
+                        <div class="variable-item-box">
+                            <span class="variable-label-name">Eficiencia</span>
+                            <span class="variable-value-range">0 - 100 %</span>
+                        </div>
+                        <div class="variable-item-box">
+                            <span class="variable-label-name">Pasos Diarios</span>
+                            <span class="variable-value-range">0 - 15.000</span>
+                        </div>
+                        <div class="variable-item-box">
+                            <span class="variable-label-name">Actividad Intensa</span>
+                            <span class="variable-value-range">0 - 60 Min</span>
+                        </div>
+                    </div>
+                    <ul class="insight-list-wrapper">
+                        <li class="insight-list-item">
+                            <i class="fa-solid fa-circle-check insight-bullet-point"></i>
+                            <span><strong>Lógica Mamdani:</strong> Fuzzificación mediante funciones triangulares (Bajo,
+                                Medio, Alto).</span>
+                        </li>
+                        <li class="insight-list-item">
+                            <i class="fa-solid fa-check insight-bullet-point"></i>
+                            <span><strong>Reglas Expertas:</strong> 12 reglas derivadas del consenso Delphi con
+                                especialistas en salud.</span>
+                        </li>
+                        <li class="insight-list-item">
+                            <i class="fa-solid fa-heart-circle-check insight-bullet-point"></i>
+                            <span><strong>Defuzzificación:</strong> Salida única de Rendimiento Físico Estimado (escala
+                                0-100).</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Right Column: Results -->
+            <div class="right-column-results">
+                <div class="simulation-info-card">
+                    <div class="card-title-wrapper">
+                        <i class="fas fa-chart-line card-icon-style"></i>
+                        <span class="card-title-text">Resultados de Simulación Montecarlo</span>
+                    </div>
+                    <div class="montecarlo-stats-container">
+                        <div class="stat-highlight-box">
+                            <span class="stat-label-text">Iteraciones Ejecutadas</span>
+                            <span class="stat-value-text">1.000 Casos</span>
+                        </div>
+                        <div class="chart-placeholder-container" id="simulation-distribution-chart"></div>
+                        <ul class="insight-list-wrapper">
+                            <li class="insight-list-item">
+                                <i class="fas fa-lightbulb insight-bullet-point"></i>
+                                <span><strong>Tendencia Coherente:</strong> El modelo valida que un descanso óptimo y
+                                    actividad moderada incrementan significativamente el rendimiento.</span>
+                            </li>
+                            <li class="insight-list-item">
+                                <i class="fas fa-lightbulb insight-bullet-point"></i>
+                                <span><strong>Estabilidad:</strong> Respuesta lógica del sistema ante variaciones
+                                    estocásticas en las variables de entrada.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function initSimulationDistributionChart() {
+            const chartDom = document.getElementById('simulation-distribution-chart');
+            if (!chartDom) return;
+
+            const myChart = echarts.init(chartDom);
+            const option = {
+                title: {
+                    text: 'Relación: Hábitos vs. Rendimiento Estimado',
+                    left: 'center',
+                    textStyle: {
+                        fontSize: 12,
+                        color: '#7F8C8D'
+                    }
+                },
+                tooltip: {},
+                xAxis: {
+                    type: 'category',
+                    data: ['Crítico', 'Bajo', 'Medio', 'Alto', 'Óptimo'],
+                    axisLabel: { color: '#7F8C8D', fontSize: 10 },
+                    axisLine: { lineStyle: { color: '#ECF0F1' } }
+                },
+                yAxis: {
+                    type: 'value',
+                    splitLine: { lineStyle: { type: 'dashed' } },
+                    axisLabel: { color: '#7F8C8D', fontSize: 10 }
+                },
+                grid: {
+                    top: 40,
+                    bottom: 30,
+                    left: 40,
+                    right: 20
+                },
+                series: [{
+                    data: [15, 25, 45, 75, 92],
+                    type: 'bar',
+                    itemStyle: {
+                        color: function (params) {
+                            const colorList = ['#E74C3C', '#F39C12', '#F1C40F', '#2ECC71', '#27AE60'];
+                            return colorList[params.dataIndex];
+                        },
+                        borderRadius: [4, 4, 0, 0]
+                    },
+                    barWidth: '60%'
+                }]
+            };
+
+            myChart.setOption(option);
+            myChart.resize();
+            window.addEventListener('resize', function () {
+                myChart.resize();
+            });
+        }
+
+        window.addEventListener('load', initSimulationDistributionChart);
+    </script>
+</body>
+
+</html>

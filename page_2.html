@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Método Delphi: Influencia de la Hinchada</title>
+    <script src="https://picture-search.skywork.ai/aippt/static/tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" rel="stylesheet" />
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+
+        body {
+            width: 1280px;
+            height: 720px;
+            overflow: hidden;
+            background-color: #F4F7F6;
+            font-family: "Segoe UI", "Roboto", "Helvetica Neue", sans-serif
+        }
+
+        .delphi-slide-root {
+            width: 1280px;
+            height: 720px;
+            background-color: #F4F7F6;
+            display: flex;
+            flex-direction: column;
+            position: relative
+        }
+
+        .title-section-container {
+            display: flex;
+            flex-direction: column;
+            margin: 30px 50px 20px 50px;
+            padding: 0
+        }
+
+        .title-accent-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 15px
+        }
+
+        .title-vertical-bar {
+            width: 4px;
+            background-color: #27AE60;
+            height: 35px;
+            border-radius: 2px
+        }
+
+        .title-text-group {
+            display: flex;
+            flex-direction: column
+        }
+
+        .title-main-heading {
+            font-family: "Segoe UI", sans-serif;
+            font-weight: 700;
+            font-size: 26px;
+            color: #2C3E50;
+            margin: 0;
+            padding: 0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px
+        }
+
+        .title-sub-heading {
+            font-family: "Segoe UI", sans-serif;
+            font-weight: 400;
+            font-size: 14px;
+            color: #7F8C8D;
+            margin: 2px 0 0 0;
+            padding: 0
+        }
+
+        .delphi-main-content {
+            display: flex;
+            flex: 1;
+            margin: 0 50px 30px 50px;
+            gap: 30px;
+            align-items: stretch
+        }
+
+        .delphi-left-column {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 20px;
+            flex: 2
+        }
+
+        .delphi-right-column {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            flex: 3
+        }
+
+        .delphi-process-card {
+            background-color: #FFF;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            flex: 1
+        }
+
+        .delphi-card-label {
+            color: #2980B9;
+            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px
+        }
+
+        .delphi-round-list {
+            list-style: none;
+            padding: 0;
+            margin: 0
+        }
+
+        .delphi-round-item {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px
+        }
+
+        .delphi-icon-box {
+            background-color: #F4F7F6;
+            color: #27AE60;
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0
+        }
+
+        .delphi-round-content {
+            display: flex;
+            flex-direction: column
+        }
+
+        .delphi-round-title {
+            font-weight: 700;
+            font-size: 14px;
+            color: #2C3E50
+        }
+
+        .delphi-round-desc {
+            font-size: 13px;
+            color: #7F8C8D
+        }
+
+        .delphi-expert-info {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #F0F0F0;
+            font-size: 13px;
+            color: #2C3E50
+        }
+
+        .delphi-stadium-image-box {
+            height: 240px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1)
+        }
+
+        .delphi-stadium-image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover
+        }
+
+        .delphi-table-container {
+            background-color: #FFF;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05)
+        }
+
+        .delphi-results-table {
+            width: 100%;
+            border-collapse: collapse
+        }
+
+        .delphi-results-table th {
+            background-color: #2980B9;
+            color: #FFF;
+            text-align: left;
+            padding: 18px 15px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px
+        }
+
+        .delphi-results-table td {
+            padding: 16px 15px;
+            border-bottom: 1px solid #F0F0F0;
+            font-size: 14px;
+            color: #2C3E50
+        }
+
+        .delphi-status-chip {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 11px;
+            text-transform: uppercase
+        }
+
+        .status-include {
+            background-color: #E8F5E9;
+            color: #27AE60
+        }
+
+        .status-exclude {
+            background-color: #FFEBEE;
+            color: #E74C3C
+        }
+
+        html {
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="delphi-slide-root" style="overflow: hidden;">
+        <!-- Section Title -->
+        <div class="title-section-container">
+            <div class="title-accent-wrapper">
+                <div class="title-vertical-bar"></div>
+                <div class="title-text-group">
+                    <h2 class="title-main-heading">Método Delphi: Influencia de la Hinchada</h2>
+                    <p class="title-sub-heading">Identificación y validación de variables clave mediante tres rondas de
+                        consulta con expertos, priorizando el apoyo, la localía y la presión sobre la fidelidad
+                        histórica.</p>
+                </div>
+            </div>
+        </div>
+        <!-- Main Content -->
+        <div class="delphi-main-content">
+            <!-- Left Column: Process & Image -->
+            <div class="delphi-left-column">
+                <div class="delphi-process-card">
+                    <div class="delphi-card-label">
+                        <i class="fas fa-users-gear"></i>
+                        <span>Proceso de Consulta Experta</span>
+                    </div>
+                    <div class="delphi-round-list">
+                        <div class="delphi-round-item">
+                            <div class="delphi-icon-box"><i class="fa-solid fa-circle-info"></i></div>
+                            <div class="delphi-round-content">
+                                <span class="delphi-round-title">Ronda 1: Exploración</span>
+                                <span class="delphi-round-desc">Identificación cualitativa de factores de
+                                    influencia.</span>
+                            </div>
+                        </div>
+                        <div class="delphi-round-item">
+                            <div class="delphi-icon-box"><i class="fas fa-arrow-up-9-1"></i></div>
+                            <div class="delphi-round-content">
+                                <span class="delphi-round-title">Ronda 2: Priorización</span>
+                                <span class="delphi-round-desc">Escala 1-5 y análisis de dispersión estadística.</span>
+                            </div>
+                        </div>
+                        <div class="delphi-round-item">
+                            <div class="delphi-icon-box"><i class="fas fa-check-double"></i></div>
+                            <div class="delphi-round-content">
+                                <span class="delphi-round-title">Ronda 3: Validación</span>
+                                <span class="delphi-round-desc">Consenso final y selección de variables del
+                                    modelo.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="delphi-expert-info">
+                        <strong>Panel de Expertos:</strong> 5 especialistas (2 entrenadores y 3 jugadores profesionales
+                        activos).
+                    </div>
+                </div>
+                <div class="delphi-stadium-image-box">
+                    <img alt="Hinchada en el estadio"
+                        src="https://agents-download.skywork.ai/image/rt/95bbd9e4ef4ba2efec16f2f825b267c0.jpg" />
+                </div>
+            </div>
+            <!-- Right Column: Results Table -->
+            <div class="delphi-right-column">
+                <div class="delphi-table-container">
+                    <table class="delphi-results-table">
+                        <thead>
+                            <tr>
+                                <th>Variable</th>
+                                <th>Media</th>
+                                <th>CV</th>
+                                <th>Aprob.</th>
+                                <th>Decisión</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Apoyo y Motivación</strong></td>
+                                <td>5.00</td>
+                                <td>0.00</td>
+                                <td>100%</td>
+                                <td><span class="delphi-status-chip status-include">Incluir</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Factor de Localía</strong></td>
+                                <td>5.00</td>
+                                <td>0.00</td>
+                                <td>100%</td>
+                                <td><span class="delphi-status-chip status-include">Incluir</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Presión y Hostilidad</strong></td>
+                                <td>4.40</td>
+                                <td>0.12</td>
+                                <td>100%</td>
+                                <td><span class="delphi-status-chip status-include">Incluir</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Fidelidad Histórica</strong></td>
+                                <td>3.20</td>
+                                <td>0.14</td>
+                                <td>20%</td>
+                                <td><span class="delphi-status-chip status-exclude">Excluir</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

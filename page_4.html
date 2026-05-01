@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Simulación Montecarlo en el Fútbol</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <script src="https://picture-search.skywork.ai/aippt/static/tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" rel="stylesheet" />
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;700&family=Roboto:wght@300;400;700&display=swap");
+
+        body {
+            width: 1280px;
+            height: 720px;
+            overflow: hidden;
+            background-color: #F4F7F6;
+            font-family: "Segoe UI", "Roboto", sans-serif;
+            color: #2C3E50
+        }
+
+        .slide-root-container {
+            width: 1280px;
+            height: 720px;
+            background-color: #F4F7F6;
+            display: flex;
+            flex-direction: column;
+            position: relative
+        }
+
+        /* Design Section: Title Region */
+        .title-section-wrapper {
+            display: flex;
+            flex-direction: column;
+            margin: 30px 50px 20px 50px;
+            padding: 0
+        }
+
+        .title-accent-header {
+            display: flex;
+            align-items: center;
+            gap: 15px
+        }
+
+        .title-vertical-line {
+            width: 4px;
+            background-color: #27AE60;
+            height: 35px;
+            border-radius: 2px
+        }
+
+        .title-text-group {
+            display: flex;
+            flex-direction: column
+        }
+
+        .title-main-heading {
+            font-family: "Segoe UI", sans-serif;
+            font-weight: 700;
+            font-size: 26px;
+            color: #2C3E50;
+            margin: 0;
+            padding: 0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px
+        }
+
+        .title-sub-heading {
+            font-family: "Segoe UI", sans-serif;
+            font-weight: 400;
+            font-size: 14px;
+            color: #7F8C8D;
+            margin: 2px 0 0 0;
+            padding: 0
+        }
+
+        /* Layout Content */
+        .main-content-layout {
+            display: flex;
+            flex: 1;
+            padding: 0 50px 40px 50px;
+            gap: 30px;
+            align-items: stretch
+        }
+
+        .left-stats-column {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 20px
+        }
+
+        .right-chart-column {
+            flex: 3;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 20px
+        }
+
+        /* Cards and Elements */
+        .metric-summary-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px
+        }
+
+        .stat-card-item {
+            background-color: #FFF;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            gap: 10px
+        }
+
+        .stat-card-icon {
+            font-size: 24px;
+            color: #2980B9
+        }
+
+        .stat-card-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: #2C3E50
+        }
+
+        .stat-card-label {
+            font-size: 14px;
+            color: #7F8C8D;
+            text-transform: uppercase;
+            letter-spacing: 1px
+        }
+
+        .scenario-analysis-box {
+            background-color: #FFF;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05)
+        }
+
+        .scenario-item-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 15px
+        }
+
+        .scenario-item-row:last-child {
+            margin-bottom: 0
+        }
+
+        .scenario-icon-status {
+            font-size: 18px;
+            margin-top: 4px
+        }
+
+        .scenario-text-content {
+            display: flex;
+            flex-direction: column
+        }
+
+        .scenario-text-title {
+            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 4px
+        }
+
+        .scenario-text-desc {
+            font-size: 14px;
+            color: #5D6D7E;
+            line-height: 1.4
+        }
+
+        .chart-visualization-container {
+            background-color: #FFF;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            height: 450px;
+            display: flex;
+            flex-direction: column
+        }
+
+        .chart-display-area {
+            flex: 1;
+            width: 100%
+        }
+
+        .chart-caption-text {
+            font-size: 12px;
+            color: #95A5A6;
+            text-align: center;
+            margin-top: 10px
+        }
+
+        .highlight-probability-badge {
+            display: inline-block;
+            background-color: #E8F6EF;
+            color: #27AE60;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 14px;
+            margin-top: 5px
+        }
+
+        html {
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slide-root-container" style="overflow: hidden;">
+        <!-- Title Section -->
+        <div class="title-section-wrapper">
+            <div class="title-accent-header">
+                <div class="title-vertical-line"></div>
+                <div class="title-text-group">
+                    <h2 class="title-main-heading">Simulación Montecarlo en el Fútbol</h2>
+                    <p class="title-sub-heading">Fase de Modelado y Análisis de Resultados</p>
+                </div>
+            </div>
+        </div>
+        <!-- Main Content -->
+        <div class="main-content-layout">
+            <!-- Left Column: Metrics and Scenarios -->
+            <div class="left-stats-column">
+                <div class="metric-summary-grid">
+                    <div class="stat-card-item">
+                        <i class="fa-solid fa-circle-info stat-card-icon"></i>
+                        <div class="stat-card-value">5.000</div>
+                        <div class="stat-card-label">Simulaciones</div>
+                    </div>
+                    <div class="stat-card-item">
+                        <i class="fas fa-chart-area stat-card-icon"></i>
+                        <div class="stat-card-value">38.50</div>
+                        <div class="stat-card-label">Media / 100</div>
+                    </div>
+                </div>
+                <div class="scenario-analysis-box">
+                    <div class="scenario-item-row">
+                        <i class="fa-solid fa-circle-check scenario-icon-status" style="color: #27AE60;"></i>
+                        <div class="scenario-text-content">
+                            <span class="scenario-text-title">Escenarios Favorables</span>
+                            <span class="scenario-text-desc">Combinación de apoyo alto, localía y baja presión
+                                ambiental.</span>
+                        </div>
+                    </div>
+                    <div class="scenario-item-row">
+                        <i class="fa-solid fa-triangle-exclamation scenario-icon-status" style="color: #E74C3C;"></i>
+                        <div class="scenario-text-content">
+                            <span class="scenario-text-title">Escenarios Críticos</span>
+                            <span class="scenario-text-desc">Resultados de bajo rendimiento ante hostilidad y bajo
+                                apoyo.</span>
+                            <span class="highlight-probability-badge">P(≥70) = 5.76%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Right Column: Visualization -->
+            <div class="right-chart-column">
+                <div class="chart-visualization-container">
+                    <div class="chart-display-area" id="monte-carlo-gauge"></div>
+                    <p class="chart-caption-text">Distribución estocástica del rendimiento estimado bajo incertidumbre
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function initMonteCarloGauge() {
+            const chartDom = document.getElementById('monte-carlo-gauge');
+            if (!chartDom) return;
+
+            const myChart = echarts.init(chartDom);
+            const option = {
+                series: [
+                    {
+                        type: 'gauge',
+                        startAngle: 180,
+                        endAngle: 0,
+                        center: ['50%', '75%'],
+                        radius: '110%',
+                        min: 0,
+                        max: 100,
+                        splitNumber: 5,
+                        axisLine: {
+                            lineStyle: {
+                                width: 12,
+                                color: [
+                                    [0.3, '#E74C3C'],
+                                    [0.7, '#F1C40F'],
+                                    [1, '#27AE60']
+                                ]
+                            }
+                        },
+                        pointer: {
+                            icon: 'path://M12.8,0.7l12,40.1H0.7L12.8,0.7z',
+                            length: '12%',
+                            width: 15,
+                            offsetCenter: [0, '-60%'],
+                            itemStyle: {
+                                color: '#2C3E50'
+                            }
+                        },
+                        axisTick: {
+                            length: 8,
+                            lineStyle: {
+                                color: 'auto',
+                                width: 2
+                            }
+                        },
+                        splitLine: {
+                            length: 15,
+                            lineStyle: {
+                                color: 'auto',
+                                width: 4
+                            }
+                        },
+                        axisLabel: {
+                            color: '#7F8C8D',
+                            fontSize: 14,
+                            distance: -50,
+                            formatter: function (value) {
+                                if (value === 0) return 'Bajo';
+                                if (value === 50) return 'Medio';
+                                if (value === 100) return 'Alto';
+                                return '';
+                            }
+                        },
+                        title: {
+                            offsetCenter: [0, '-20%'],
+                            fontSize: 18,
+                            fontWeight: 'bold',
+                            color: '#2C3E50'
+                        },
+                        detail: {
+                            fontSize: 45,
+                            offsetCenter: [0, '0%'],
+                            valueAnimation: true,
+                            formatter: '{value}',
+                            color: '#2C3E50'
+                        },
+                        data: [
+                            {
+                                value: 38.5,
+                                name: 'Media de Rendimiento'
+                            }
+                        ]
+                    }
+                ]
+            };
+
+            myChart.setOption(option);
+            myChart.resize();
+            window.addEventListener('resize', function () {
+                myChart.resize();
+            });
+        }
+
+        window.addEventListener('load', initMonteCarloGauge);
+    </script>
+</body>
+
+</html>

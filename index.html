@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <title>Presentación web - Taller 2</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/theme/white.css">
+
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      background: #111;
+    }
+
+    .reveal {
+      background: #111;
+    }
+
+    .reveal .slides {
+      text-align: initial;
+    }
+
+    .reveal section {
+      padding: 0;
+      margin: 0;
+      width: 1280px;
+      height: 720px;
+      overflow: hidden;
+      background: #F4F7F6;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35);
+    }
+
+    .slide-frame {
+      width: 1280px;
+      height: 720px;
+      border: none;
+      display: block;
+      overflow: hidden;
+      background: #F4F7F6;
+    }
+
+    .reveal .progress {
+      color: #27AE60;
+    }
+
+    .reveal .controls {
+      color: #27AE60;
+    }
+
+    .reveal .slide-number {
+      background: rgba(44, 62, 80, 0.85);
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section><iframe class="slide-frame" src="page_1.html"></iframe></section>
+      <section><iframe class="slide-frame" src="page_2.html"></iframe></section>
+      <section><iframe class="slide-frame" src="page_3.html"></iframe></section>
+      <section><iframe class="slide-frame" src="page_4.html"></iframe></section>
+      <section><iframe class="slide-frame" src="page_5.html"></iframe></section>
+      <section><iframe class="slide-frame" src="page_6.html"></iframe></section>
+      <section><iframe class="slide-frame" src="page_7.html"></iframe></section>
+      <section><iframe class="slide-frame" src="page_8.html"></iframe></section>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      width: 1280,
+      height: 720,
+      margin: 0.02,
+      hash: true,
+      controls: true,
+      progress: true,
+      slideNumber: true,
+      transition: "slide",
+      backgroundTransition: "fade"
+    });
+  </script>
+</body>
+
+</html>

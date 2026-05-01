@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=1280, height=720" name="viewport" />
+    <title>Sistema de Inferencia Difuso Mamdani</title>
+    <script src="https://picture-search.skywork.ai/aippt/static/tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" rel="stylesheet" />
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            width: 1280px;
+            height: 720px;
+            overflow: hidden;
+            background-color: #F4F7F6;
+            font-family: "Segoe UI", "Roboto", "Helvetica Neue", sans-serif;
+            color: #2C3E50
+        }
+
+        /* Slide Root */
+        .mamdani-slide-root {
+            width: 1280px;
+            height: 720px;
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+            position: relative
+        }
+
+        /* Title Section - Strictly following <DESIGN> */
+        .title-section-container {
+            display: flex;
+            flex-direction: column;
+            margin: 30px 50px 20px 50px;
+            padding: 0
+        }
+
+        .title-header-flex {
+            display: flex;
+            align-items: center;
+            gap: 15px
+        }
+
+        .title-accent-bar {
+            width: 4px;
+            background-color: #27AE60;
+            height: 35px;
+            border-radius: 2px
+        }
+
+        .title-text-group {
+            display: flex;
+            flex-direction: column
+        }
+
+        .title-main-heading {
+            font-family: "Segoe UI", sans-serif;
+            font-weight: 700;
+            font-size: 26px;
+            color: #2C3E50;
+            margin: 0;
+            padding: 0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px
+        }
+
+        .title-sub-heading {
+            font-family: "Segoe UI", sans-serif;
+            font-weight: 400;
+            font-size: 14px;
+            color: #7F8C8D;
+            margin: 2px 0 0 0;
+            padding: 0;
+            line-height: 1.4;
+            max-width: 1000px
+        }
+
+        /* Main Content Layout */
+        .mamdani-main-wrapper {
+            display: flex;
+            flex: 1;
+            margin: 0 50px 40px 50px;
+            gap: 30px;
+            align-items: stretch
+        }
+
+        /* Columns */
+        .left-logic-column,
+        .right-data-column {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 25px;
+            width: 50%
+        }
+
+        /* Repeated Module: Cards */
+        .mamdani-info-card {
+            background-color: #FFF;
+            border-radius: 12px;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid #2980B9
+        }
+
+        .card-header-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px
+        }
+
+        .card-header-icon {
+            font-size: 20px;
+            color: #2980B9
+        }
+
+        .card-header-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #2C3E50;
+            text-transform: uppercase
+        }
+
+        /* List Items inside Cards */
+        .card-list-wrapper {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 15px
+        }
+
+        .card-list-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 15px;
+            line-height: 1.5;
+            color: #34495E
+        }
+
+        .item-bullet {
+            color: #27AE60;
+            margin-top: 4px;
+            font-size: 12px
+        }
+
+        .item-text-bold {
+            font-weight: 700;
+            color: #2C3E50;
+            margin-right: 5px
+        }
+
+        /* Specific styles for labels */
+        .label-tag-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px
+        }
+
+        .label-badge {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            background-color: #ECF0F1;
+            color: #2980B9
+        }
+
+        html {
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="mamdani-slide-root" style="overflow: hidden;">
+        <!-- Title Section -->
+        <div class="title-section-container">
+            <div class="title-header-flex">
+                <div class="title-accent-bar"></div>
+                <div class="title-text-group">
+                    <h2 class="title-main-heading">Sistema de Inferencia Difuso Mamdani</h2>
+                    <p class="title-sub-heading">
+                        Estructura del modelo que utiliza etiquetas lingüísticas y reglas lógicas para transformar
+                        factores cualitativos de la hinchada en una estimación cuantitativa del rendimiento del equipo.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!-- Main Content Area -->
+        <div class="mamdani-main-wrapper">
+            <!-- Left Column: Process & Rules -->
+            <div class="left-logic-column">
+                <!-- Architecture Card -->
+                <div class="mamdani-info-card">
+                    <div class="card-header-group">
+                        <i class="fa-solid fa-microchip card-header-icon"></i>
+                        <h3 class="card-header-title">Arquitectura del Proceso</h3>
+                    </div>
+                    <ul class="card-list-wrapper">
+                        <li class="card-list-item">
+                            <i class="fa-solid fa-circle-play item-bullet"></i>
+                            <div><span class="item-text-bold">Fuzzificación:</span> Conversión de entradas numéricas
+                                (1-5) a grados de pertenencia en conjuntos difusos.</div>
+                        </li>
+                        <li class="card-list-item">
+                            <i class="fa-solid fa-gears item-bullet"></i>
+                            <div><span class="item-text-bold">Inferencia:</span> Evaluación de 12 reglas lógicas
+                                mediante operadores AND (mínimo) y OR (máximo).</div>
+                        </li>
+                        <li class="card-list-item">
+                            <i class="fa-solid fa-arrow-right-to-bracket item-bullet"></i>
+                            <div><span class="item-text-bold">Defuzzificación:</span> Obtención de un valor nítido final
+                                (Rendimiento 0-100) mediante centroide.</div>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Rules Card -->
+                <div class="mamdani-info-card">
+                    <div class="card-header-group">
+                        <i class="fa-solid fa-scale-balanced card-header-icon"></i>
+                        <h3 class="card-header-title">Lógica de Reglas Clave</h3>
+                    </div>
+                    <ul class="card-list-wrapper">
+                        <li class="card-list-item">
+                            <i class="fa-solid fa-check item-bullet"></i>
+                            <div>Si <span class="item-text-bold">Apoyo Alto</span> Y <span
+                                    class="item-text-bold">Localía Alta</span> entonces Rendimiento <span
+                                    class="item-text-bold">Alto</span>.</div>
+                        </li>
+                        <li class="card-list-item">
+                            <i class="fa-solid fa-check item-bullet"></i>
+                            <div>Si <span class="item-text-bold">Presión Alta</span> entonces el Rendimiento se estima
+                                como <span class="item-text-bold">Bajo</span>.</div>
+                        </li>
+                        <li class="card-list-item">
+                            <i class="fa-solid fa-check item-bullet"></i>
+                            <div>Si <span class="item-text-bold">Apoyo Bajo</span> el sistema penaliza el Rendimiento a
+                                nivel <span class="item-text-bold">Bajo</span>.</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Right Column: Variables & Membership -->
+            <div class="right-data-column">
+                <!-- Variables Card -->
+                <div class="mamdani-info-card">
+                    <div class="card-header-group">
+                        <i class="fa-solid fa-sliders card-header-icon"></i>
+                        <h3 class="card-header-title">Variables del Sistema</h3>
+                    </div>
+                    <ul class="card-list-wrapper">
+                        <li class="card-list-item">
+                            <i class="fa-solid fa-right-to-bracket item-bullet"></i>
+                            <div><span class="item-text-bold">Entradas (Escala 1-5):</span> Apoyo y Motivación, Presión
+                                y Hostilidad, Factor de Localía.</div>
+                        </li>
+                        <li class="card-list-item">
+                            <i class="fa-solid fa-right-from-bracket item-bullet"></i>
+                            <div><span class="item-text-bold">Salida (Escala 0-100):</span> Rendimiento estimado del
+                                equipo basado en la influencia externa.</div>
+                        </li>
+                        <li class="card-list-item">
+                            <i class="fa-solid fa-database item-bullet"></i>
+                            <div><span class="item-text-bold">Consenso:</span> Variables validadas mediante 3 rondas
+                                Delphi con expertos del fútbol.</div>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Membership Functions Card -->
+                <div class="mamdani-info-card">
+                    <div class="card-header-group">
+                        <i class="fa-solid fa-chart-line card-header-icon"></i>
+                        <h3 class="card-header-title">Funciones de Pertenencia</h3>
+                    </div>
+                    <ul class="card-list-wrapper">
+                        <li class="card-list-item">
+                            <i class="fa-solid fa-shapes item-bullet"></i>
+                            <div><span class="item-text-bold">Tipo:</span> Funciones triangulares que definen la
+                                transición entre estados cualitativos.</div>
+                        </li>
+                        <li class="card-list-item">
+                            <i class="fa-solid fa-tags item-bullet"></i>
+                            <div><span class="item-text-bold">Etiquetas Lingüísticas:</span> Categorización del impacto
+                                en tres niveles diferenciados.</div>
+                        </li>
+                    </ul>
+                    <div class="label-tag-container">
+                        <span class="label-badge">Bajo (1, 1, 3)</span>
+                        <span class="label-badge">Medio (2, 3, 4)</span>
+                        <span class="label-badge">Alto (3, 5, 5)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Análisis de Regresión y Predicción</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;700&amp;family=Roboto:wght@400;700&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://picture-search.skywork.ai/aippt/static/tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" rel="stylesheet" />
+    <style>
+        /* Base Styles */
+        body {
+            width: 1280px;
+            height: 720px;
+            overflow: hidden;
+            background-color: #F4F7F6;
+            display: flex;
+            justify-content: center;
+            align-items: center
+        }
+
+        .slide-root-container {
+            width: 1280px;
+            height: 720px;
+            background-color: #F4F7F6;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box
+        }
+
+        /* Title Design Implementation */
+        .title-section-container {
+            display: flex;
+            flex-direction: column;
+            margin: 30px 50px 20px 50px;
+            padding: 0
+        }
+
+        .title-accent-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 15px
+        }
+
+        .title-accent-vertical-bar {
+            width: 4px;
+            background-color: #27AE60;
+            height: 35px;
+            border-radius: 2px
+        }
+
+        .title-text-group {
+            display: flex;
+            flex-direction: column
+        }
+
+        .title-main-heading {
+            font-family: "Segoe UI", sans-serif;
+            font-weight: 700;
+            font-size: 26px;
+            color: #2C3E50;
+            margin: 0;
+            padding: 0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px
+        }
+
+        .title-sub-heading {
+            font-family: "Segoe UI", sans-serif;
+            font-weight: 400;
+            font-size: 14px;
+            color: #7F8C8D;
+            margin: 2px 0 0 0;
+            padding: 0
+        }
+
+        /* Layout Columns */
+        .content-columns-flex-wrapper {
+            display: flex;
+            flex: 1;
+            margin: 0 50px 40px 50px;
+            gap: 40px;
+            align-items: stretch
+        }
+
+        .left-metrics-column-block {
+            flex: 1.2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center
+        }
+
+        .right-importance-column-block {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 25px
+        }
+
+        /* Table Styles */
+        .metrics-comparison-table-element {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #FFF;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            font-family: "Segoe UI", sans-serif
+        }
+
+        .metrics-comparison-table-element thead {
+            background-color: #2980B9;
+            color: #FFF
+        }
+
+        .metrics-comparison-table-element th {
+            padding: 18px 15px;
+            text-align: left;
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px
+        }
+
+        .metrics-comparison-table-element td {
+            padding: 16px 15px;
+            border-bottom: 1px solid #ECF0F1;
+            color: #2C3E50;
+            font-size: 15px
+        }
+
+        .metrics-comparison-table-element tr:last-child td {
+            border-bottom: none
+        }
+
+        .metrics-comparison-table-element tr:nth-child(even) {
+            background-color: #F9FBFC
+        }
+
+        .highlight-row {
+            background-color: rgba(39, 174, 96, 0.08) !important;
+            font-weight: 700
+        }
+
+        .text-accent-primary {
+            color: #27AE60;
+            font-weight: 700
+        }
+
+        /* Importance Ranking Styles */
+        .importance-ranking-card-item {
+            background-color: #FFF;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            gap: 15px
+        }
+
+        .card-title-with-icon {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #2980B9;
+            font-family: "Segoe UI", sans-serif;
+            font-weight: 700;
+            font-size: 18px;
+            margin-bottom: 5px
+        }
+
+        .importance-list-container {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 12px
+        }
+
+        .variable-rank-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 10px;
+            background-color: #F4F7F6;
+            border-radius: 8px;
+            font-family: "Segoe UI", sans-serif;
+            color: #2C3E50;
+            font-size: 15px
+        }
+
+        .rank-number-badge {
+            width: 28px;
+            height: 28px;
+            background-color: #27AE60;
+            color: #FFF;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 700;
+            font-size: 14px;
+            flex-shrink: 0
+        }
+
+        .key-findings-summary-card {
+            background-color: #FFF;
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 5px solid #2980B9;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            font-family: "Segoe UI", sans-serif
+        }
+
+        .findings-paragraph-text {
+            margin: 0;
+            color: #2C3E50;
+            font-size: 14px;
+            line-height: 1.6
+        }
+
+        .strong-label {
+            color: #2980B9;
+            font-weight: 700
+        }
+
+        html {
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slide-root-container" style="overflow: hidden;">
+        <!-- Header Section -->
+        <div class="title-section-container">
+            <div class="title-accent-wrapper">
+                <div class="title-accent-vertical-bar"></div>
+                <div class="title-text-group">
+                    <h2 class="title-main-heading">ANÁLISIS DE REGRESIÓN Y PREDICCIÓN</h2>
+                    <p class="title-sub-heading">Comparación de modelos donde Random Forest destaca con alta precisión,
+                        confirmando que el apoyo y la motivación son los factores con mayor impacto en el rendimiento.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!-- Main Content Area -->
+        <div class="content-columns-flex-wrapper">
+            <!-- Left Column: Comparison Table -->
+            <div class="left-metrics-column-block">
+                <table class="metrics-comparison-table-element">
+                    <thead>
+                        <tr>
+                            <th>Modelo de Regresión</th>
+                            <th>MAE</th>
+                            <th>RMSE</th>
+                            <th>R² Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="highlight-row">
+                            <td><i class="fas fa-crown" style="color: #F1C40F; margin-right: 8px;"></i>Random Forest
+                            </td>
+                            <td class="text-accent-primary">0.92</td>
+                            <td class="text-accent-primary">1.28</td>
+                            <td class="text-accent-primary">0.9949</td>
+                        </tr>
+                        <tr>
+                            <td>K-NN Regression</td>
+                            <td>Bueno</td>
+                            <td>Bueno</td>
+                            <td>Alto</td>
+                        </tr>
+                        <tr>
+                            <td>Árbol de Decisión</td>
+                            <td>Moderado</td>
+                            <td>Moderado</td>
+                            <td>Moderado</td>
+                        </tr>
+                        <tr>
+                            <td>Regresión Lineal</td>
+                            <td>Menor Precisión</td>
+                            <td>Menor Precisión</td>
+                            <td>Menor</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- Right Column: Variable Importance -->
+            <div class="right-importance-column-block">
+                <div class="importance-ranking-card-item">
+                    <div class="card-title-with-icon">
+                        <i class="fas fa-ranking-star"></i>
+                        <span>Importancia de Variables</span>
+                    </div>
+                    <div class="importance-list-container">
+                        <div class="variable-rank-row">
+                            <div class="rank-number-badge">1</div>
+                            <span>Apoyo y Motivación (Factor Dominante)</span>
+                        </div>
+                        <div class="variable-rank-row">
+                            <div class="rank-number-badge">2</div>
+                            <span>Factor de Localía</span>
+                        </div>
+                        <div class="variable-rank-row" style="opacity: 0.8;">
+                            <div class="rank-number-badge" style="background-color: #7F8C8D;">3</div>
+                            <span>Presión y Hostilidad</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="key-findings-summary-card">
+                    <p class="findings-paragraph-text">
+                        <span class="strong-label">Hallazgo Clave:</span> La regresión lineal confirmó una correlación
+                        <span style="color: #27AE60;">positiva</span> significativa para el <strong>Apoyo</strong> y la
+                        <strong>Localía</strong>, mientras que la <strong>Presión</strong> ejerce un impacto <span
+                            style="color: #E74C3C;">negativo</span> sobre el rendimiento estimado del equipo.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

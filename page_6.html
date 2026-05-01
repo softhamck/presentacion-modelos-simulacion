@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <script src="https://picture-search.skywork.ai/aippt/static/tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" rel="stylesheet" />
+    <style>
+        /* Base Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            width: 1280px;
+            height: 720px;
+            overflow: hidden;
+            background-color: #F4F7F6;
+            display: flex;
+            justify-content: center;
+            align-items: center
+        }
+
+        /* Slide Root */
+        .slide-main-canvas {
+            width: 1280px;
+            height: 720px;
+            background-color: #F4F7F6;
+            color: #2C3E50;
+            font-family: "Segoe UI", "Roboto", "Helvetica Neue", sans-serif;
+            display: flex;
+            flex-direction: column
+        }
+
+        /* Title Design Template */
+        .title-section-container {
+            display: flex;
+            flex-direction: column;
+            margin: 30px 50px 20px 50px;
+            padding: 0
+        }
+
+        .title-header-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 15px
+        }
+
+        .title-accent-bar {
+            width: 4px;
+            background-color: #27AE60;
+            height: 35px;
+            border-radius: 2px
+        }
+
+        .title-text-group {
+            display: flex;
+            flex-direction: column
+        }
+
+        .title-main-heading {
+            font-family: "Segoe UI", sans-serif;
+            font-weight: 700;
+            font-size: 26px;
+            color: #2C3E50;
+            margin: 0;
+            padding: 0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px
+        }
+
+        .title-sub-heading {
+            font-family: "Segoe UI", sans-serif;
+            font-weight: 400;
+            font-size: 14px;
+            color: #7F8C8D;
+            margin: 2px 0 0 0;
+            padding: 0
+        }
+
+        /* Layout Columns */
+        .content-columns-wrapper {
+            flex: 1;
+            display: flex;
+            margin: 0 50px 40px 50px;
+            gap: 40px;
+            align-items: stretch
+        }
+
+        .methodology-left-column {
+            width: 40%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 25px
+        }
+
+        .selection-right-column {
+            width: 60%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center
+        }
+
+        /* Cards and Lists */
+        .info-block-item {
+            background-color: #FFF;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            flex: 1;
+            display: flex;
+            flex-direction: column
+        }
+
+        .block-header-text {
+            font-size: 18px;
+            font-weight: 700;
+            color: #27AE60;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px
+        }
+
+        .detail-list-wrapper {
+            list-style: none;
+            padding: 0;
+            margin: 0
+        }
+
+        .detail-list-point {
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 12px;
+            color: #34495E;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px
+        }
+
+        .detail-list-point i {
+            color: #2980B9;
+            margin-top: 4px;
+            font-size: 12px
+        }
+
+        /* Table Design */
+        .selection-table-container {
+            background-color: #FFF;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05)
+        }
+
+        .native-data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px
+        }
+
+        .native-data-table th {
+            text-align: left;
+            padding: 12px 15px;
+            background-color: #F8F9F9;
+            color: #7F8C8D;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 12px;
+            border-bottom: 2px solid #ECF0F1
+        }
+
+        .native-data-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #ECF0F1;
+            color: #2C3E50
+        }
+
+        .status-badge-include {
+            color: #27AE60;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 6px
+        }
+
+        .status-badge-exclude {
+            color: #E74C3C;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 6px
+        }
+
+        .score-highlight {
+            font-weight: 600;
+            color: #2980B9
+        }
+
+        html {
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slide-main-canvas" style="overflow: hidden;">
+        <!-- Title Region -->
+        <div class="title-section-container">
+            <div class="title-header-wrapper">
+                <div class="title-accent-bar"></div>
+                <div class="title-text-group">
+                    <h2 class="title-main-heading">Calidad del Sueño y Rendimiento Físico</h2>
+                    <p class="title-sub-heading">Proceso Delphi para seleccionar variables críticas como horas de sueño,
+                        eficiencia y actividad física, estableciendo las bases del sistema de inferencia para la salud.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!-- Main Content -->
+        <div class="content-columns-wrapper">
+            <!-- Left Column: Methodology & Panel -->
+            <div class="methodology-left-column">
+                <div class="info-block-item">
+                    <div class="block-header-text">
+                        <i class="fas fa-users"></i>
+                        Panel de Expertos
+                    </div>
+                    <ul class="detail-list-wrapper">
+                        <li class="detail-list-point">
+                            <i class="fas fa-circle"></i>
+                            Constituido por entrenadores físicos profesionales y un fisioterapeuta especializado.
+                        </li>
+                    </ul>
+                </div>
+                <div class="info-block-item">
+                    <div class="block-header-text">
+                        <i class="fas fa-clipboard-check"></i>
+                        Método Delphi (3 Rondas)
+                    </div>
+                    <ul class="detail-list-wrapper">
+                        <li class="detail-list-point">
+                            <i class="fas fa-1"></i>
+                            Identificación cualitativa de parámetros de salud y actividad física.
+                        </li>
+                        <li class="detail-list-point">
+                            <i class="fas fa-2"></i>
+                            Priorización basada en importancia y facilidad de medición técnica.
+                        </li>
+                        <li class="detail-list-point">
+                            <i class="fas fa-3"></i>
+                            Consenso final sobre variables de entrada para el modelo difuso.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Right Column: Variable Selection Table -->
+            <div class="selection-right-column">
+                <div class="selection-table-container">
+                    <table class="native-data-table">
+                        <thead>
+                            <tr>
+                                <th>Variable del Sistema</th>
+                                <th>Importancia</th>
+                                <th>Medición</th>
+                                <th>Decisión</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Horas de sueño</td>
+                                <td class="score-highlight">5.00</td>
+                                <td class="score-highlight">5.00</td>
+                                <td class="status-badge-include"><i class="fa-solid fa-circle-check"></i> Incluir</td>
+                            </tr>
+                            <tr>
+                                <td>Minutos actividad intensa</td>
+                                <td class="score-highlight">5.00</td>
+                                <td class="score-highlight">4.67</td>
+                                <td class="status-badge-include"><i class="fa-solid fa-check"></i> Incluir</td>
+                            </tr>
+                            <tr>
+                                <td>Eficiencia del sueño</td>
+                                <td class="score-highlight">4.67</td>
+                                <td class="score-highlight">4.33</td>
+                                <td class="status-badge-include"><i class="fa-solid fa-heart-circle-check"></i> Incluir
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Pasos diarios</td>
+                                <td class="score-highlight">4.33</td>
+                                <td class="score-highlight">5.00</td>
+                                <td class="status-badge-include"><i class="fa-solid fa-house-circle-check"></i> Incluir
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Calorías activas</td>
+                                <td>3.33</td>
+                                <td>3.33</td>
+                                <td class="status-badge-exclude"><i class="fa-solid fa-circle-h"></i> Excluir</td>
+                            </tr>
+                            <tr>
+                                <td>Distancia recorrida</td>
+                                <td>2.67</td>
+                                <td>3.33</td>
+                                <td class="status-badge-exclude"><i class="fa-solid fa-circle-up"></i> Excluir</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
